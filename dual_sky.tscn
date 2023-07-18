@@ -1,27 +1,139 @@
-[gd_scene load_steps=5 format=3 uid="uid://uvwsgplm7mi"]
+[gd_scene load_steps=15 format=3 uid="uid://uvwsgplm7mi"]
 
 [ext_resource type="PackedScene" uid="uid://ci1vhjj8jh7n1" path="res://dual_sky_bg.tscn" id="1_3mnrs"]
+[ext_resource type="PackedScene" uid="uid://blyagw475gl54" path="res://player.tscn" id="1_hxame"]
+[ext_resource type="Script" path="res://dual_sky.gd" id="1_l00i2"]
 [ext_resource type="Texture2D" uid="uid://ljo0d4w5jbyt" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_5.png" id="2_cak1v"]
 [ext_resource type="Texture2D" uid="uid://bvpryun4en2l0" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_2.png" id="3_75r54"]
 [ext_resource type="Texture2D" uid="uid://km03w57c5pix" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_3.png" id="4_hx72b"]
+[ext_resource type="Texture2D" uid="uid://boemhffj0mkyt" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_1.png" id="5_8hr2e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lh2b6"]
+radius = 22.0
+height = 136.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ri3h6"]
+radius = 15.0
+height = 164.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nb4j7"]
+radius = 6.0
+height = 96.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uc8ht"]
+radius = 11.0
+height = 118.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_htgcj"]
+radius = 18.0
+height = 186.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y1tg5"]
+radius = 14.0
+height = 176.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wpvp"]
+size = Vector2(1973, 105.5)
 
 [node name="Dual Sky" type="Node2D"]
+script = ExtResource("1_l00i2")
+
+[node name="Player" parent="." instance=ExtResource("1_hxame")]
+position = Vector2(974, 258)
 
 [node name="DualSkyBG" parent="." instance=ExtResource("1_3mnrs")]
 
+[node name="CloudsColliders" type="Node2D" parent="."]
+
+[node name="C1" type="StaticBody2D" parent="CloudsColliders"]
+
+[node name="C1Shape" type="CollisionShape2D" parent="CloudsColliders/C1"]
+position = Vector2(21, 989)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_lh2b6")
+
+[node name="C2" type="StaticBody2D" parent="CloudsColliders"]
+
+[node name="C2Shape" type="CollisionShape2D" parent="CloudsColliders/C2"]
+position = Vector2(368, 844)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ri3h6")
+
+[node name="C3" type="StaticBody2D" parent="CloudsColliders"]
+
+[node name="C3Shape" type="CollisionShape2D" parent="CloudsColliders/C3"]
+position = Vector2(816, 643)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nb4j7")
+
+[node name="C4" type="StaticBody2D" parent="CloudsColliders"]
+
+[node name="C4Shape" type="CollisionShape2D" parent="CloudsColliders/C4"]
+position = Vector2(423, 520)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_uc8ht")
+
+[node name="C5" type="StaticBody2D" parent="CloudsColliders"]
+
+[node name="C5Shape" type="CollisionShape2D" parent="CloudsColliders/C5"]
+position = Vector2(968, 397)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_htgcj")
+
+[node name="C6" type="StaticBody2D" parent="CloudsColliders"]
+
+[node name="C6Shape" type="CollisionShape2D" parent="CloudsColliders/C6"]
+position = Vector2(454, 207)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_y1tg5")
+
 [node name="Clouds" type="CanvasGroup" parent="."]
+metadata/_edit_lock_ = true
 
-[node name="CloudShape35" type="Sprite2D" parent="Clouds"]
-position = Vector2(1152, 904)
-texture = ExtResource("2_cak1v")
-
-[node name="CloudShape32" type="Sprite2D" parent="Clouds"]
-position = Vector2(768, 488)
-texture = ExtResource("3_75r54")
-
-[node name="CloudShape33" type="Sprite2D" parent="Clouds"]
-position = Vector2(1080, 512)
-texture = ExtResource("4_hx72b")
-
-[node name="CanvasModulate" type="CanvasModulate" parent="Clouds"]
+[node name="CloudsModulate" type="CanvasModulate" parent="Clouds"]
 color = Color(1, 0.611765, 0.639216, 1)
+metadata/_edit_lock_ = true
+
+[node name="C1" type="Sprite2D" parent="Clouds"]
+position = Vector2(21, 973)
+scale = Vector2(3, 3)
+texture = ExtResource("2_cak1v")
+metadata/_edit_lock_ = true
+
+[node name="C2" type="Sprite2D" parent="Clouds"]
+position = Vector2(366, 819)
+texture = ExtResource("3_75r54")
+metadata/_edit_lock_ = true
+
+[node name="C3" type="Sprite2D" parent="Clouds"]
+position = Vector2(817, 639)
+texture = ExtResource("4_hx72b")
+metadata/_edit_lock_ = true
+
+[node name="C4" type="Sprite2D" parent="Clouds"]
+position = Vector2(423, 503)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_cak1v")
+metadata/_edit_lock_ = true
+
+[node name="C5" type="Sprite2D" parent="Clouds"]
+position = Vector2(975, 388)
+scale = Vector2(2, 2)
+texture = ExtResource("4_hx72b")
+metadata/_edit_lock_ = true
+
+[node name="C6" type="Sprite2D" parent="Clouds"]
+position = Vector2(449, 188)
+texture = ExtResource("5_8hr2e")
+metadata/_edit_lock_ = true
+
+[node name="FallPrevention" type="Area2D" parent="."]
+position = Vector2(29, 1039)
+gravity = -9800.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallPrevention"]
+position = Vector2(951, 245)
+shape = SubResource("RectangleShape2D_4wpvp")
+
+[connection signal="body_entered" from="FallPrevention" to="." method="_on_fall_prevention_body_entered"]
+[connection signal="body_exited" from="FallPrevention" to="." method="_on_fall_prevention_body_exited"]
