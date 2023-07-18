@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://uvwsgplm7mi"]
+[gd_scene load_steps=19 format=3 uid="uid://uvwsgplm7mi"]
 
 [ext_resource type="PackedScene" uid="uid://ci1vhjj8jh7n1" path="res://dual_sky_bg.tscn" id="1_3mnrs"]
 [ext_resource type="PackedScene" uid="uid://blyagw475gl54" path="res://player.tscn" id="1_hxame"]
 [ext_resource type="Script" path="res://dual_sky.gd" id="1_l00i2"]
 [ext_resource type="Texture2D" uid="uid://ljo0d4w5jbyt" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_5.png" id="2_cak1v"]
 [ext_resource type="Texture2D" uid="uid://bvpryun4en2l0" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_2.png" id="3_75r54"]
+[ext_resource type="FontFile" uid="uid://s8v5la6yuwtw" path="res://Fonts/MuseoModerno/static/MuseoModerno-Medium.ttf" id="4_12o7a"]
 [ext_resource type="Texture2D" uid="uid://km03w57c5pix" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_3.png" id="4_hx72b"]
 [ext_resource type="Texture2D" uid="uid://boemhffj0mkyt" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_1.png" id="5_8hr2e"]
 
@@ -28,12 +29,21 @@ height = 118.0
 radius = 18.0
 height = 186.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6jc1k"]
+radius = 10.032
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y1tg5"]
 radius = 14.0
 height = 176.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1epwj"]
+height = 204.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0qvei"]
+radius = 102.005
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wpvp"]
-size = Vector2(1973, 105.5)
+size = Vector2(3620, 105.5)
 
 [node name="Dual Sky" type="Node2D"]
 script = ExtResource("1_l00i2")
@@ -62,7 +72,7 @@ shape = SubResource("CapsuleShape2D_ri3h6")
 [node name="C3" type="StaticBody2D" parent="CloudsColliders"]
 
 [node name="C3Shape" type="CollisionShape2D" parent="CloudsColliders/C3"]
-position = Vector2(816, 643)
+position = Vector2(817, 644)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_nb4j7")
 
@@ -80,12 +90,58 @@ position = Vector2(968, 397)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_htgcj")
 
+[node name="Warning" type="Area2D" parent="CloudsColliders/C5"]
+position = Vector2(29, 1039)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloudsColliders/C5/Warning"]
+position = Vector2(947, -657)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_6jc1k")
+
 [node name="C6" type="StaticBody2D" parent="CloudsColliders"]
 
 [node name="C6Shape" type="CollisionShape2D" parent="CloudsColliders/C6"]
 position = Vector2(454, 207)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_y1tg5")
+
+[node name="C7" type="StaticBody2D" parent="CloudsColliders"]
+
+[node name="C7Shape" type="CollisionShape2D" parent="CloudsColliders/C7"]
+position = Vector2(65, 155)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1epwj")
+
+[node name="NextLevelInstructions" type="Area2D" parent="CloudsColliders/C7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloudsColliders/C7/NextLevelInstructions"]
+position = Vector2(72, 146)
+shape = SubResource("CircleShape2D_0qvei")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextPrompts" type="CanvasGroup" parent="CanvasLayer"]
+
+[node name="WarnSeparation" type="RichTextLabel" parent="CanvasLayer/TextPrompts"]
+offset_left = 798.0
+offset_top = 173.0
+offset_right = 1152.0
+offset_bottom = 255.0
+theme_override_fonts/normal_font = ExtResource("4_12o7a")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[color=white][center]Don't jump in this (→) direction
+(pls)[/center][/color]"
+
+[node name="NextLevelIndication" type="RichTextLabel" parent="CanvasLayer/TextPrompts"]
+offset_left = 155.0
+offset_top = 38.0
+offset_right = 498.0
+offset_bottom = 113.0
+theme_override_fonts/normal_font = ExtResource("4_12o7a")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[color=white][center]Awesome, now just jump straight up![/center][/color]"
 
 [node name="Clouds" type="CanvasGroup" parent="."]
 metadata/_edit_lock_ = true
@@ -127,13 +183,25 @@ position = Vector2(449, 188)
 texture = ExtResource("5_8hr2e")
 metadata/_edit_lock_ = true
 
+[node name="C7" type="Sprite2D" parent="Clouds"]
+position = Vector2(71, 152)
+scale = Vector2(2, 2)
+texture = ExtResource("4_hx72b")
+flip_h = true
+metadata/_edit_lock_ = true
+
 [node name="FallPrevention" type="Area2D" parent="."]
 position = Vector2(29, 1039)
 gravity = -9800.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FallPrevention"]
-position = Vector2(951, 245)
+[node name="FallPreventionCollisionShape" type="CollisionShape2D" parent="FallPrevention"]
+position = Vector2(925, 245)
 shape = SubResource("RectangleShape2D_4wpvp")
+metadata/_edit_lock_ = true
 
+[connection signal="body_entered" from="CloudsColliders/C5/Warning" to="." method="_on_warning_body_entered"]
+[connection signal="body_exited" from="CloudsColliders/C5/Warning" to="." method="_on_warning_body_exited"]
+[connection signal="body_entered" from="CloudsColliders/C7/NextLevelInstructions" to="." method="_on_next_level_instructions_body_entered"]
+[connection signal="body_exited" from="CloudsColliders/C7/NextLevelInstructions" to="." method="_on_next_level_instructions_body_exited"]
 [connection signal="body_entered" from="FallPrevention" to="." method="_on_fall_prevention_body_entered"]
 [connection signal="body_exited" from="FallPrevention" to="." method="_on_fall_prevention_body_exited"]
