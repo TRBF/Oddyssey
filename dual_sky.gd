@@ -35,3 +35,7 @@ func _on_next_level_instructions_body_entered(body):
 func _on_next_level_instructions_body_exited(body):
 	if(body.name == "Player"):
 		$CanvasLayer/TextPrompts/NextLevelIndication.hide()
+
+
+func _on_next_level_area_body_entered(body):
+	get_tree().change_scene_to_file("res://inner_1.tscn")

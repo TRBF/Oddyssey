@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -700.0
-
+var GDIR = 1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -37,16 +37,16 @@ func _physics_process(delta):
 	time += delta
 	Input.is_action_pressed("ui_accept")
 	if not is_on_floor() and !is_attacking():
-		velocity.y += gravity * delta
+		velocity.y += gravity * delta * GDIR
 	
 	if(time-jumptime>jumpmax && jumptime!=0):
-		velocity.y = JUMP_VELOCITY
+		velocity.y = JUMP_VELOCITY * GDIR
 		jumptime = 0
 	
-	if jumptime == 0 and velocity.y==0 and Input.is_action_pressed("ui_accept") and is_on_floor() and !is_attacking():
+	if jumptime == 0 and velocity.y * GDIR==0 and Input.is_action_pressed("ui_accept") and is_on_floor() and !is_attacking():
 		jumptime = time
 	elif jumptime!=0 and not Input.is_action_pressed("ui_accept"):
-		velocity.y = JUMP_VELOCITY * (time-jumptime) / jumpmax 
+		velocity.y = JUMP_VELOCITY * (time-jumptime) / jumpmax * GDIR
 		jumptime = 0
 
 	if Input.is_action_pressed("ui_accept") and is_on_floor():
@@ -73,9 +73,9 @@ func _physics_process(delta):
 			if_animation_running_play("Run", "RunEnd", "Idle")
 		if(not $AnimationPlayer.is_playing()):
 			runanim("Idle")
-	elif(velocity.y<0 and $AnimationPlayer.current_animation != "Knockback"):
+	elif(velocity.y * GDIR<0 and $AnimationPlayer.current_animation != "Knockback"):
 		runanim("JumpAsc")
-	elif(velocity.y>0 and $AnimationPlayer.current_animation != "Knockback"):
+	elif(velocity.y * GDIR>0 and $AnimationPlayer.current_animation != "Knockback"):
 		if(last_ran != "JumpDesc"):
 			runanim("JumpDesc")
 		
@@ -108,3 +108,5 @@ func is_attacking():
 		if $AnimationPlayer.current_animation == attack:
 			detected = true
 
+func invert_gravity():
+	GDIR = -1 * GDIR
