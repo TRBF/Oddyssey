@@ -1,8 +1,9 @@
-[gd_scene load_steps=293 format=3 uid="uid://l3i3hiw2vffm"]
+[gd_scene load_steps=293 format=3 uid="uid://ybrda1h715le"]
 
 [ext_resource type="Script" path="res://inner_1.gd" id="1_l4yql"]
 [ext_resource type="Texture2D" uid="uid://0t8hak77ty18" path="res://Art/Tilesets/Industrial Zone Tileset/1 Tiles/IndustrialTile_01.png" id="1_rigil"]
 [ext_resource type="Texture2D" uid="uid://dakqp085rdct" path="res://Art/Tilesets/Industrial Zone Tileset/1 Tiles/IndustrialTile_10.png" id="2_l68sg"]
+[ext_resource type="PackedScene" uid="uid://bgrbpowidmds8" path="res://mobile_controls.tscn" id="2_rt16r"]
 [ext_resource type="Texture2D" uid="uid://wq7363d3pw51" path="res://Art/Tilesets/Industrial Zone Tileset/1 Tiles/IndustrialTile_11.png" id="3_csysc"]
 [ext_resource type="Texture2D" uid="uid://ka8hi2or6u2f" path="res://Art/Tilesets/Industrial Zone Tileset/1 Tiles/IndustrialTile_12.png" id="4_7t2og"]
 [ext_resource type="Texture2D" uid="uid://dv7n8e0pb8alb" path="res://Art/Tilesets/Industrial Zone Tileset/1 Tiles/IndustrialTile_13.png" id="5_e4ajf"]
@@ -82,7 +83,6 @@
 [ext_resource type="Texture2D" uid="uid://ci0tc03b8kcyd" path="res://Art/Tilesets/Industrial Zone Tileset/1 Tiles/IndustrialTile_80.png" id="79_yic7d"]
 [ext_resource type="Texture2D" uid="uid://nde0qjgk31wm" path="res://Art/Tilesets/Industrial Zone Tileset/1 Tiles/IndustrialTile_81.png" id="80_0yynh"]
 [ext_resource type="Texture2D" uid="uid://dkc61oppvxcth" path="res://Art/Tilesets/Industrial Zone Tileset/1 Tiles/IndustrialTile_09.png" id="81_0vnk8"]
-[ext_resource type="PackedScene" uid="uid://bgge8bg0b67xs" path="res://industrial_bg.tscn" id="83_lqg0l"]
 [ext_resource type="Script" path="res://player.gd" id="83_q7hjy"]
 [ext_resource type="Texture2D" uid="uid://inencscbhnxy" path="res://Art/Sprites/JediConverted/air-dash.png" id="84_o1hyv"]
 [ext_resource type="Texture2D" uid="uid://c7fc5cbgtet7k" path="res://Art/Sprites/JediConverted/attack.png" id="85_8euoq"]
@@ -1614,7 +1614,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 0)]
+"values": [Vector2(1, -1)]
 }
 
 [sub_resource type="Animation" id="Animation_868hk"]
@@ -2088,6 +2088,8 @@ height = 21.3333
 [node name="Inner1" type="Node2D"]
 script = ExtResource("1_l4yql")
 
+[node name="MobileControls" parent="." instance=ExtResource("2_rt16r")]
+
 [node name="NoCollision" type="TileMap" parent="."]
 format = 2
 
@@ -2132,7 +2134,11 @@ shape = SubResource("CapsuleShape2D_xfhjv")
 
 [node name="JumpTimer" type="Timer" parent="UpsideDownPlayer"]
 
-[node name="IndustrialBG" parent="." instance=ExtResource("83_lqg0l")]
-
-[connection signal="animation_finished" from="UpsideDownPlayer/AnimationPlayer" to="UpsideDownPlayer" method="_on_animation_player_animation_finished" flags=18]
-[connection signal="timeout" from="UpsideDownPlayer/JumpTimer" to="UpsideDownPlayer" method="_on_max_jump_reached" flags=18]
+[node name="Camera2D" type="Camera2D" parent="UpsideDownPlayer"]
+zoom = Vector2(1.2, 1.2)
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0

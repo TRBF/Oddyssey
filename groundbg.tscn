@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://i3ok46o3natq"]
+[gd_scene load_steps=6 format=3 uid="uid://d107l4nr0vnex"]
 
 [ext_resource type="Texture2D" uid="uid://nkww1fi66gyf" path="res://Art/Tilesets/Exclusion Zone/2 Background/Night/1.png" id="1_8eg5b"]
 [ext_resource type="Texture2D" uid="uid://b14kf7l4x05ck" path="res://Art/Tilesets/Exclusion Zone/2 Background/Night/2.png" id="2_mju7f"]

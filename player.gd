@@ -34,8 +34,12 @@ func _ready():
 		finished_playing[name] = 0
 
 func _physics_process(delta):
+	if is_on_ceiling():
+		print("ceiling")
+	if is_on_floor():
+		print("floor")
 	time += delta
-	Input.is_action_pressed("ui_accept")
+	Input.is_action_pressed("game_jump")
 	if not is_on_floor() and !is_attacking():
 		velocity.y += gravity * delta * GDIR
 	
@@ -43,21 +47,21 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY * GDIR
 		jumptime = 0
 	
-	if jumptime == 0 and velocity.y * GDIR==0 and Input.is_action_pressed("ui_accept") and is_on_floor() and !is_attacking():
+	if jumptime == 0 and velocity.y * GDIR==0 and Input.is_action_pressed("game_jump") and is_on_floor() and !is_attacking():
 		jumptime = time
-	elif jumptime!=0 and not Input.is_action_pressed("ui_accept"):
+	elif jumptime!=0 and not Input.is_action_pressed("game_jump"):
 		velocity.y = JUMP_VELOCITY * (time-jumptime) / jumpmax * GDIR
 		jumptime = 0
 
-	if Input.is_action_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_pressed("game_jump") and is_on_floor():
 		runanim("JumpPrepare")
 	
 	if is_on_floor():
-		direction = Input.get_axis("ui_left", "ui_right")
+		direction = Input.get_axis("game_left", "game_right")
 	if is_on_wall_only():
 		direction *= -1
 		runanim("Knockback")
-	if direction and not(Input.is_action_pressed("ui_accept") and is_on_floor()):
+	if direction and not(Input.is_action_pressed("game_jump") and is_on_floor()):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
