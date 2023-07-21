@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgrbpowidmds8"]
+
+[ext_resource type="Texture2D" uid="uid://2yle14pp7d1l" path="res://Art/Tilesets/Buttons/PixelartButton.png" id="1_mufvl"]
+
+[node name="MobileControls" type="CanvasLayer"]
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2(1417, 837)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("1_mufvl")
+action = "game_left"
+
+[node name="Jump" type="TouchScreenButton" parent="."]
+position = Vector2(257, 837)
+rotation = 1.5708
+scale = Vector2(3, 3)
+texture_normal = ExtResource("1_mufvl")
+action = "game_jump"
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2(1853, 1029)
+rotation = 3.14159
+scale = Vector2(3, 3)
+texture_normal = ExtResource("1_mufvl")
+action = "game_right"
