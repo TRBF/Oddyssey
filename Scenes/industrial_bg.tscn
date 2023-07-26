@@ -11,6 +11,7 @@ scroll_ignore_camera_zoom = true
 script = ExtResource("1_v4ng7")
 
 [node name="BGLayer1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1, 0)
 motion_mirroring = Vector2(1920, 0)
 
 [node name="L1" type="Sprite2D" parent="BGLayer1"]
@@ -40,7 +41,7 @@ scale = Vector2(3.33259, 3.32909)
 texture = ExtResource("4_yp3c2")
 
 [node name="BGLayer4" type="ParallaxLayer" parent="."]
-motion_scale = Vector2(-0.18, -0.18)
+motion_scale = Vector2(-0.18, 0)
 motion_mirroring = Vector2(1920, 0)
 
 [node name="L4" type="Sprite2D" parent="BGLayer4"]

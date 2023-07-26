@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://d4eopphec6nha"]
 
+[ext_resource type="Script" path="res://Scripts/start.gd" id="1_e3048"]
 [ext_resource type="FontFile" uid="uid://uftgl87pd7gl" path="res://Fonts/MuseoModerno/static/MuseoModerno-Bold.ttf" id="1_lm3l1"]
 [ext_resource type="PackedScene" uid="uid://cbl6bgvg4k7kg" path="res://Scenes/bgmaintitle.tscn" id="1_og2iw"]
-[ext_resource type="Script" path="res://start.gd" id="1_wqj4b"]
 [ext_resource type="FontFile" uid="uid://s8v5la6yuwtw" path="res://Fonts/MuseoModerno/static/MuseoModerno-Medium.ttf" id="3_k1ewn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnmfk"]
@@ -28,7 +28,7 @@ Button/styles/normal = SubResource("StyleBoxFlat_lwmsx")
 Button/styles/pressed = SubResource("StyleBoxFlat_3ssfb")
 
 [node name="StartScreen" type="CanvasLayer"]
-script = ExtResource("1_wqj4b")
+script = ExtResource("1_e3048")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0

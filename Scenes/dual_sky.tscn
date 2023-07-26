@@ -1,14 +1,20 @@
-[gd_scene load_steps=21 format=3 uid="uid://cnrytryk0g26d"]
+[gd_scene load_steps=36 format=3 uid="uid://cnrytryk0g26d"]
 
 [ext_resource type="PackedScene" uid="uid://ci1vhjj8jh7n1" path="res://Scenes/dual_sky_bg.tscn" id="1_3mnrs"]
-[ext_resource type="PackedScene" uid="uid://dcyxqbit4qiwc" path="res://player.tscn" id="1_hxame"]
+[ext_resource type="PackedScene" uid="uid://blyagw475gl54" path="res://Scenes/player.tscn" id="1_hxame"]
 [ext_resource type="Script" path="res://Scripts/dual_sky.gd" id="1_l00i2"]
 [ext_resource type="Texture2D" uid="uid://ljo0d4w5jbyt" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_5.png" id="2_cak1v"]
-[ext_resource type="PackedScene" uid="uid://bgrbpowidmds8" path="res://mobile_controls.tscn" id="2_tcibb"]
+[ext_resource type="PackedScene" uid="uid://bgrbpowidmds8" path="res://Scenes/mobile_controls.tscn" id="2_tcibb"]
 [ext_resource type="Texture2D" uid="uid://bvpryun4en2l0" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_2.png" id="3_75r54"]
 [ext_resource type="FontFile" uid="uid://s8v5la6yuwtw" path="res://Fonts/MuseoModerno/static/MuseoModerno-Medium.ttf" id="4_12o7a"]
 [ext_resource type="Texture2D" uid="uid://km03w57c5pix" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_3.png" id="4_hx72b"]
 [ext_resource type="Texture2D" uid="uid://boemhffj0mkyt" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape3/cloud_shape3_1.png" id="5_8hr2e"]
+[ext_resource type="PackedScene" uid="uid://c1gx4i11hxuaw" path="res://ud_sky.tscn" id="5_k41hm"]
+[ext_resource type="PackedScene" uid="uid://cneixcu3sjurp" path="res://Scenes/upside_down_player.tscn" id="10_bxgx7"]
+[ext_resource type="Texture2D" uid="uid://cxmfyfljiw8kj" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape2/cloud_shape2_1.png" id="11_coofk"]
+[ext_resource type="Texture2D" uid="uid://b7kgbrs782hrm" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape2/cloud_shape2_2.png" id="13_64v36"]
+[ext_resource type="Texture2D" uid="uid://cj8i1sw1cobcq" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape2/cloud_shape2_3.png" id="14_tgw0n"]
+[ext_resource type="Texture2D" uid="uid://brj6vsj5i5fgo" path="res://Art/Tilesets/Clouds/PNG/Clouds_white/Shape2/cloud_shape2_5.png" id="15_fpley"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lh2b6"]
 radius = 22.0
@@ -46,8 +52,39 @@ radius = 102.005
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wpvp"]
 size = Vector2(3620, 105.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kirge"]
+size = Vector2(938, 105.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7sxlj"]
 size = Vector2(224, 82)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6q8ru"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe07v"]
+size = Vector2(40, 1080)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cx1ld"]
+radius = 8.0
+height = 400.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_afy2a"]
+radius = 8.0
+height = 288.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2ps3"]
+radius = 8.0
+height = 216.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ce7cb"]
+radius = 6.0
+height = 202.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ik48m"]
+height = 82.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l4le1"]
+radius = 41.0
+height = 100.0
 
 [node name="Dual Sky" type="Node2D"]
 script = ExtResource("1_l00i2")
@@ -57,7 +94,16 @@ script = ExtResource("1_l00i2")
 [node name="Player" parent="." instance=ExtResource("1_hxame")]
 position = Vector2(30, 802)
 
+[node name="UpsideDownPlayer" parent="." instance=ExtResource("10_bxgx7")]
+position = Vector2(1304, 200)
+
 [node name="DualSkyBG" parent="." instance=ExtResource("1_3mnrs")]
+
+[node name="UDSkyBG" parent="." instance=ExtResource("5_k41hm")]
+offset = Vector2(1920, 1080)
+rotation = -3.14159
+transform = Transform2D(-1, -8.74228e-08, 8.74228e-08, -1, 1920, 1080)
+scroll_base_scale = Vector2(-1, -1)
 
 [node name="CloudsColliders" type="Node2D" parent="."]
 
@@ -153,6 +199,24 @@ bbcode_enabled = true
 text = "[color=white][center]Awesome, now just jump straight up![/center][/color]"
 metadata/_edit_lock_ = true
 
+[node name="FinalLevelIndication" type="RichTextLabel" parent="CanvasLayer/TextPrompts"]
+offset_left = 1177.0
+offset_top = 541.0
+offset_right = 1520.0
+offset_bottom = 815.0
+theme_override_fonts/normal_font = ExtResource("4_12o7a")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[color=white][center]
+Wow!
+Well, that was something,
+ wasn't it?
+
+Now just jump
+ straight...uhhh...down...I guess?[/center][/color]"
+autowrap_mode = 0
+metadata/_edit_lock_ = true
+
 [node name="Clouds" type="CanvasGroup" parent="."]
 metadata/_edit_lock_ = true
 
@@ -209,11 +273,120 @@ position = Vector2(925, 245)
 shape = SubResource("RectangleShape2D_4wpvp")
 metadata/_edit_lock_ = true
 
+[node name="UDCFallPrevention" type="Area2D" parent="."]
+position = Vector2(29, 1039)
+gravity = -9800.0
+
+[node name="UDCFallPreventionCollision" type="CollisionShape2D" parent="UDCFallPrevention"]
+position = Vector2(1487, -1156)
+shape = SubResource("RectangleShape2D_kirge")
+
 [node name="NextLevelArea" type="Area2D" parent="."]
 
 [node name="NextLevelAreaCollision" type="CollisionShape2D" parent="NextLevelArea"]
 position = Vector2(85, -117)
 shape = SubResource("RectangleShape2D_7sxlj")
+
+[node name="FinalLevelArea" type="Area2D" parent="."]
+
+[node name="FinalLevelAreaCollision" type="CollisionShape2D" parent="FinalLevelArea"]
+position = Vector2(1336, 1160)
+shape = SubResource("RectangleShape2D_7sxlj")
+
+[node name="SeparationLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="SeparationLayer"]
+color = Color(0.517647, 0.192157, 1, 1)
+
+[node name="LimitLeft" type="StaticBody2D" parent="SeparationLayer"]
+physics_material_override = SubResource("PhysicsMaterial_6q8ru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationLayer/LimitLeft"]
+position = Vector2(1132, 540)
+shape = SubResource("RectangleShape2D_qe07v")
+
+[node name="LimitRight" type="StaticBody2D" parent="SeparationLayer"]
+position = Vector2(1, 0)
+physics_material_override = SubResource("PhysicsMaterial_6q8ru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationLayer/LimitRight"]
+position = Vector2(1927, 541)
+shape = SubResource("RectangleShape2D_qe07v")
+
+[node name="UpsideDownClouds" type="CanvasGroup" parent="."]
+position = Vector2(1200, 168)
+scale = Vector2(1.5, 1.5)
+
+[node name="UDC1" type="Sprite2D" parent="UpsideDownClouds"]
+position = Vector2(74.6667, -73.3333)
+rotation = 3.14159
+texture = ExtResource("11_coofk")
+
+[node name="UDC2" type="Sprite2D" parent="UpsideDownClouds"]
+position = Vector2(400, 96)
+rotation = 3.14159
+texture = ExtResource("13_64v36")
+
+[node name="UDC3" type="Sprite2D" parent="UpsideDownClouds"]
+position = Vector2(48.6666, 237.333)
+rotation = 3.14159
+texture = ExtResource("14_tgw0n")
+
+[node name="UDC4" type="Sprite2D" parent="UpsideDownClouds"]
+position = Vector2(384.667, 411.333)
+rotation = 3.14159
+scale = Vector2(2, 2)
+texture = ExtResource("15_fpley")
+flip_h = true
+
+[node name="UDC5" type="Sprite2D" parent="UpsideDownClouds"]
+position = Vector2(90.6665, 465.333)
+rotation = 3.14159
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_8hr2e")
+
+[node name="UpsideDownCloudsColliders" type="Node2D" parent="."]
+
+[node name="UDC1" type="StaticBody2D" parent="UpsideDownCloudsColliders"]
+
+[node name="UDC1Shape" type="CollisionShape2D" parent="UpsideDownCloudsColliders/UDC1"]
+position = Vector2(1320, 40)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cx1ld")
+
+[node name="UDC2" type="StaticBody2D" parent="UpsideDownCloudsColliders"]
+
+[node name="UDC2Shape" type="CollisionShape2D" parent="UpsideDownCloudsColliders/UDC2"]
+position = Vector2(1800, 296)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_afy2a")
+
+[node name="UDC3" type="StaticBody2D" parent="UpsideDownCloudsColliders"]
+
+[node name="UDC3Shape" type="CollisionShape2D" parent="UpsideDownCloudsColliders/UDC3"]
+position = Vector2(1272, 515)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_g2ps3")
+
+[node name="UDC4" type="StaticBody2D" parent="UpsideDownCloudsColliders"]
+
+[node name="UDC4Shape" type="CollisionShape2D" parent="UpsideDownCloudsColliders/UDC4"]
+position = Vector2(1779, 769)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ce7cb")
+
+[node name="UDC5" type="StaticBody2D" parent="UpsideDownCloudsColliders"]
+
+[node name="UDC5Shape" type="CollisionShape2D" parent="UpsideDownCloudsColliders/UDC5"]
+position = Vector2(1336, 850)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ik48m")
+
+[node name="UDC5Area" type="Area2D" parent="UpsideDownCloudsColliders/UDC5"]
+
+[node name="UDC5Shape" type="CollisionShape2D" parent="UpsideDownCloudsColliders/UDC5/UDC5Area"]
+position = Vector2(1336, 964)
+shape = SubResource("CapsuleShape2D_l4le1")
 
 [connection signal="body_entered" from="CloudsColliders/C5/Warning" to="." method="_on_warning_body_entered"]
 [connection signal="body_exited" from="CloudsColliders/C5/Warning" to="." method="_on_warning_body_exited"]
@@ -221,4 +394,9 @@ shape = SubResource("RectangleShape2D_7sxlj")
 [connection signal="body_exited" from="CloudsColliders/C7/NextLevelInstructions" to="." method="_on_next_level_instructions_body_exited"]
 [connection signal="body_entered" from="FallPrevention" to="." method="_on_fall_prevention_body_entered"]
 [connection signal="body_exited" from="FallPrevention" to="." method="_on_fall_prevention_body_exited"]
+[connection signal="body_entered" from="UDCFallPrevention" to="." method="_on_udc_fall_prevention_body_entered"]
 [connection signal="body_entered" from="NextLevelArea" to="." method="_on_next_level_area_body_entered"]
+[connection signal="body_entered" from="FinalLevelArea" to="." method="_on_final_level_area_body_entered"]
+[connection signal="area_entered" from="UpsideDownCloudsColliders/UDC5/UDC5Area" to="." method="_on_udc_5_area_area_entered"]
+[connection signal="body_entered" from="UpsideDownCloudsColliders/UDC5/UDC5Area" to="." method="_on_udc_5_area_body_entered"]
+[connection signal="body_exited" from="UpsideDownCloudsColliders/UDC5/UDC5Area" to="." method="_on_udc_5_area_body_exited"]

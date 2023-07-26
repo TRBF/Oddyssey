@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://rg3f78gijtvt"]
+
+[ext_resource type="Script" path="res://Scripts/ending.gd" id="1_nwe6b"]
+[ext_resource type="FontFile" uid="uid://s8v5la6yuwtw" path="res://Fonts/MuseoModerno/static/MuseoModerno-Medium.ttf" id="1_otfak"]
+
+[node name="Ending" type="Node2D"]
+script = ExtResource("1_nwe6b")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -42.0
+offset_top = -17.0
+offset_right = 1994.0
+offset_bottom = 1198.0
+color = Color(0, 0, 0, 1)
+
+[node name="WarnSeparation" type="RichTextLabel" parent="."]
+offset_left = 454.0
+offset_top = 68.0
+offset_right = 1525.0
+offset_bottom = 827.0
+theme_override_fonts/normal_font = ExtResource("1_otfak")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[color=white][center]
+Congratulations!
+You finally finished!
+Sorry for the headache you probably have by now.
+
+
+Also,
+ Happy Birthday, Matei!
+[/center][/color]"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 761.0
+offset_top = 860.0
+offset_right = 1202.0
+offset_bottom = 1033.0
+theme_override_fonts/font = ExtResource("1_otfak")
+theme_override_font_sizes/font_size = 50
+text = "Back to start
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

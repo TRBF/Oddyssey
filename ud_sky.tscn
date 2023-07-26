@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1gx4i11hxuaw"]
+
+[ext_resource type="Script" path="res://Scripts/dual_sky_bg.gd" id="1_ltsbo"]
+[ext_resource type="Texture2D" uid="uid://bshd1dba75m0h" path="res://Art/Tilesets/Sky/Clouds/Clouds 7/1.png" id="2_8mxm0"]
+[ext_resource type="Texture2D" uid="uid://1yghut6lw37b" path="res://Art/Tilesets/Sky/Clouds/Clouds 7/4.png" id="3_4c8j7"]
+[ext_resource type="Texture2D" uid="uid://dq0nqraexr5iy" path="res://Art/Tilesets/Sky/Clouds/Clouds 7/2.png" id="4_6se2v"]
+[ext_resource type="Texture2D" uid="uid://tglpp47gouww" path="res://Art/Tilesets/Sky/Clouds/Clouds 7/3.png" id="5_7768o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_357du"]
+light_mode = 1
+
+[node name="UDSky" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+script = ExtResource("1_ltsbo")
+
+[node name="BG" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG"]
+scale = Vector2(3.33333, 3.33333)
+texture = ExtResource("2_8mxm0")
+centered = false
+
+[node name="DarkerCloudsLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="DC1" type="Sprite2D" parent="DarkerCloudsLayer"]
+material = SubResource("CanvasItemMaterial_357du")
+position = Vector2(960, 540)
+scale = Vector2(3.33333, 3.33333)
+texture = ExtResource("3_4c8j7")
+
+[node name="ShadeLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.8, 0)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Shade" type="Sprite2D" parent="ShadeLayer"]
+position = Vector2(960, 540)
+scale = Vector2(3.33333, 3.33333)
+texture = ExtResource("4_6se2v")
+
+[node name="CloudsLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="C1" type="Sprite2D" parent="CloudsLayer"]
+position = Vector2(1184, 780)
+scale = Vector2(2.12394, 1.63738)
+texture = ExtResource("5_7768o")
+flip_h = true
+
+[node name="C2" type="Sprite2D" parent="CloudsLayer"]
+position = Vector2(820, 395)
+scale = Vector2(2.84722, 2.37654)
+texture = ExtResource("5_7768o")
